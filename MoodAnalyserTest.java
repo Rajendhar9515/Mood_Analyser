@@ -8,26 +8,44 @@ public class MoodAnalyserTest {
 
 	// Repeat T.C-1.1:- Given “I am in Sad Mood” message in Constructor Should Return SAD.
 	@Test
-	public void analysing_mood_when_sad_should_return_sad() {
+	public void analysing_mood_when_sad_should_return_sad() throws MoodAnalysisException {
 		moodAnalyser = new MoodAnalyser("I am in Sad Mood.");
 		String currentMood = moodAnalyser.analyseMood();
 		assertEquals("SAD", currentMood);
 	}
 
-	// T.C-2.1:- Given Null Mood Should Return Happy.
+	// Repeat T.C-1.2:- Given “I am in Happy Mood” message in Constructor Should Return SAD
 	@Test
-	public void analysing_mood_when_null_should_return_happy() {
-		moodAnalyser = new MoodAnalyser(null);
+	public void analysing_mood_when_happy_should_return_happy() throws MoodAnalysisException {
+		MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Happy Mood");
 		String currentMood = moodAnalyser.analyseMood();
 		assertEquals("HAPPY", currentMood);
 	}
 
-	// Repeat T.C-1.2:- Given “I am in Happy Mood” message in Constructor Should Return SAD.
+	// T.C-3.1:- Given NULL Mood Should Throw MoodAnalysisException.
+	@Test
+	public void analysing_mood_when_null_should_throw_null_exception() {
+		moodAnalyser = new MoodAnalyser();
+		String currentMood = null;
+		try {
+			currentMood = moodAnalyser.analyseMood();
+			assertEquals("HAPPY", currentMood);
+		} catch (MoodAnalysisException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	// T.C-3.2:- Given Empty Mood Should Throw MoodAnalysisException indicating Empty Mood.
 
 	@Test
-	public void analysing_mood_when_happy_should_return_happy() {
-		MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Happy Mood");
-		String currentMood = moodAnalyser.analyseMood();
-		assertEquals("HAPPY", currentMood);
+	public void analysing_mood_when_empty_should_throw_empty_exception() {
+		moodAnalyser = new MoodAnalyser("");
+		String currentMood = "";
+		try {
+			currentMood = moodAnalyser.analyseMood();
+			assertEquals("", currentMood);
+		} catch (MoodAnalysisException ex) {
+			ex.printStackTrace();
+		}
 	}
 }
